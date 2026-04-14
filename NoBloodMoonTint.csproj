@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <AssemblyName>NoBloodMoonTint</AssemblyName>
+    <Version>3.0.0</Version>
+    <MSBuildWarningsAsMessages>MSB3021;MSB3026;MSB3027</MSBuildWarningsAsMessages>
+    <RestoreSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+    </RestoreSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
+    <PackageReference Include="BepInEx.Core" Version="6.0.0-be.1" />
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.1" />
+    <PackageReference Include="HarmonyX" Version="2.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Game assemblies -->
+    <Reference Include="ProjectM">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\ProjectM.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="ProjectM.Presentation.Systems">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\ProjectM.Presentation.Systems.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="ProjectM.Camera">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\ProjectM.Camera.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="Unity.RenderPipelines.HighDefinition.Runtime">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>D:\Steam\steamapps\common\VRising\BepInEx\interop\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+  </ItemGroup>
+
+  <Target Name="MakeDeploy" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="D:\Steam\steamapps\common\VRising\BepInEx\plugins" ContinueOnError="true" />
+  </Target>
+
+</Project>
