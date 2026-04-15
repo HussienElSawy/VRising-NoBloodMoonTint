@@ -10,6 +10,8 @@ using Il2CppInterop.Runtime.Injection;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 namespace NoBloodMoonTint
 {
@@ -17,6 +19,8 @@ namespace NoBloodMoonTint
 	public class Plugin : BasePlugin
 	{
 		internal static ManualLogSource PluginLog = null!;
+
+
 		internal static Harmony? HarmonyInstance;
 		private static volatile bool _suppressHueEnabled = false;
 
@@ -50,8 +54,14 @@ namespace NoBloodMoonTint
 
 			ClassInjector.RegisterTypeInIl2Cpp<KeybindListener>();
 			AddComponent<KeybindListener>();
+
+
+			// ...
+
+
+
 			LogInfo($"[KEYBIND] Keybinds active — Scan:{ScanKey} Toggle:{ToggleKey}");
-			LogInfo("[VOLUME] LateUpdate will zero blood moon HDRP volumes each frame when suppression is on.");
+			LogInfo("[VOLUME] Suppression will reapply on scene load only.");
 			LogInfo("[VOLUME] Press F6 to scan and diff volume profiles while toggling blood moon on/off.");
 		}
 
@@ -81,11 +91,9 @@ namespace NoBloodMoonTint
 			}
 		}
 
-		void LateUpdate()
-		{
-			if (Plugin.IsSuppressionEnabled)
-				VolumeSuppress.ZeroBloodMoonVolumes();
-		}
+		
+		// LateUpdate no longer needed for suppression logic; now handled on scene load and toggle only.
+
 
 		void OnGUI()
 		{
@@ -117,8 +125,9 @@ namespace NoBloodMoonTint
 	// Suppresses blood moon screen tint by enforcing target volume state and neutralizing
 	// related color grading/material tints while suppression is enabled.
 	internal static class VolumeSuppress
-	{
-		private sealed class VolumeState
+    {
+        
+	private sealed class VolumeState
 		{
 			internal float Weight;
 			internal bool Enabled;
@@ -152,6 +161,7 @@ namespace NoBloodMoonTint
 			{
 				// Restore everything to pre-suppression state.
 				RestoreVolumes();
+
 			}
 			else
 			{

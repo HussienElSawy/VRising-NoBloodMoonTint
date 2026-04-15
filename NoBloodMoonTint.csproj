@@ -6,7 +6,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
     <AssemblyName>NoBloodMoonTint</AssemblyName>
-    <Version>3.0.0</Version>
+    <Version>4.0.0</Version>
     <MSBuildWarningsAsMessages>MSB3021;MSB3026;MSB3027</MSBuildWarningsAsMessages>
     <RestoreSources>
       https://api.nuget.org/v3/index.json;
